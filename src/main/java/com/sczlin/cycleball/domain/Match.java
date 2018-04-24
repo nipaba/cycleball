@@ -3,6 +3,9 @@ package com.sczlin.cycleball.domain;
 import lombok.Data;
 
 public @Data class Match {
+    
+    int round;
+    int matchNo;
 
     private Refferee refferee;
 
