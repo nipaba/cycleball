@@ -1,6 +1,7 @@
-<#import "menu.ftl" as m>
-<#import "header.ftl" as h>
-<#import "footer.ftl" as f>
+<#import "pagetools/menu.ftl" as m>
+<#import "pagetools/header.ftl" as h>
+<#import "pagetools/footer.ftl" as f>
+<#import "skoreTable.ftl" as s>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,6 +29,7 @@
     </ul>
     
     
+    <@s.skore teams=teams />
     
     
 	<@f.footer />

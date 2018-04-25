@@ -28,11 +28,4 @@ public class HelloController {
         return "index";
     }
 
-    @GetMapping("/mock")
-    public String hello(Model model) {
-
-        model.addAttribute("tournament", "Extraliga");
-
-        return "mock";
-    }
 }
