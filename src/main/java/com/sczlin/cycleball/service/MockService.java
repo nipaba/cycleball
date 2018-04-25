@@ -50,6 +50,12 @@ public class MockService {
         }
 
         List<Team> teams = MockService.teams;
+        Collections.shuffle(teams);
+        if (teams.size()%2==1) {
+            Team t = new Team();
+            t.setName("No team");
+            teams.add(t);
+        }
         int counter = 1;
         for (int n = 0; n < teams.size() - 1; n++) {
 
