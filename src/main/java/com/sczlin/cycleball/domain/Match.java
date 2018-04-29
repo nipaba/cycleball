@@ -4,10 +4,10 @@ import lombok.Data;
 
 public @Data class Match {
     
-    int round;
-    int matchNo;
+    private int round;
+    private int matchNo;
 
-    private Refferee refferee;
+    private Referee referee;
 
     private Team team1;
     private Team team2;

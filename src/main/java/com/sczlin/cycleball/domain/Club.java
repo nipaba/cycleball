@@ -9,5 +9,5 @@ public @Data class Club {
 
     private String clubName;
     private List<Team> teams = new ArrayList<>();
-    private List<Refferee> refferees= new ArrayList<>();
+    private List<Referee> referees= new ArrayList<>();
 }

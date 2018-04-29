@@ -1,5 +1,9 @@
 package com.sczlin.cycleball.domain;
 
-public class Place {
+import lombok.Data;
 
+public @Data class Place {
+    
+    private double longitute;
+    private double attitude;
 }

@@ -28,6 +28,10 @@ public class MockService {
     public static List<String> clubNames = Arrays.asList("Zlin", "Prerov", "Praha", "Olomouc", "Plzen", "Svitavka");
 
     public static void init() {
+        
+        
+        //TODO - TNES - REMOVE
+        LOGGER.info("XXX " + "INIT MOCK DATA");
         League l = new League();
         l.setName("1. Liga");
 
