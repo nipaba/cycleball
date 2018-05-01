@@ -2,13 +2,14 @@ package com.sczlin.cycleball.entity;
 
 import javax.persistence.*;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "tb_team", schema = "public")
-public class TeamEntity {
+public @Data class TeamEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
 
     @Column(name = "team_name")

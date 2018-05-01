@@ -2,9 +2,11 @@ package com.sczlin.cycleball.entity;
 
 import javax.persistence.*;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "tb_referee", schema = "public")
-public class RefereeEntity {
+public @Data class RefereeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

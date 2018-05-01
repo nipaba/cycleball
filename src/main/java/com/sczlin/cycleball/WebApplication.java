@@ -24,6 +24,9 @@ public class WebApplication {
     @Autowired
     private DataSource dataSource;
 
+    @Autowired
+    private MockService mock;
+
     public static void main(String[] args) throws Exception {
 
         SpringApplication.run(WebApplication.class, args);
@@ -32,8 +35,10 @@ public class WebApplication {
     @EventListener(ApplicationReadyEvent.class)
     public void doSomethingAfterStartup() throws IOException {
 
-        MockService.init();
-//        Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler http://localhost:8081/");
+        mock.init();
+        // Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler
+        // http://localhost:8081/");
         LOGGER.info("XXX " + "Our DataSource is = " + dataSource);
+
     }
 }

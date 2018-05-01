@@ -1,24 +1,37 @@
 package com.sczlin.cycleball.service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sczlin.cycleball.domain.Club;
 import com.sczlin.cycleball.domain.League;
 import com.sczlin.cycleball.domain.Match;
-import com.sczlin.cycleball.domain.Player;
 import com.sczlin.cycleball.domain.Team;
-import com.sczlin.cycleball.domain.Tournament;
+import com.sczlin.cycleball.entity.LicenceEntity;
+import com.sczlin.cycleball.entity.PlayerEntity;
+import com.sczlin.cycleball.repository.LeagueRepository;
+import com.sczlin.cycleball.repository.jpa.LicenceJpaRepository;
+import com.sczlin.cycleball.repository.jpa.PlayerJpaRepository;
 
+@Service
 public class MockService {
 
     private static final Logger LOGGER = Logger.getLogger(MockService.class);
+
+    @Autowired
+    private PlayerJpaRepository playerJpaRepository;
+
+    @Autowired
+    private LicenceJpaRepository licenceJpaRepository;
+
+    @Autowired
+    private LeagueRepository leagueRepository;
 
     public static List<League> leagues = new ArrayList<>();
     public static List<Club> clubs = new ArrayList<>();
@@ -27,18 +40,13 @@ public class MockService {
 
     public static List<String> clubNames = Arrays.asList("Zlin", "Prerov", "Praha", "Olomouc", "Plzen", "Svitavka");
 
-    public static void init() {
-        
-        
-        //TODO - TNES - REMOVE
-        LOGGER.info("XXX " + "INIT MOCK DATA");
-        League l = new League();
-        l.setName("1. Liga");
+    public void init() {
+        initStatics();
+        initDb();
+    }
 
-        League l2 = new League();
-        l2.setName("2. Liga");
-        leagues.add(l);
-        leagues.add(l2);
+    public static void initStatics() {
+        LOGGER.info("XXX " + "INIT MOCK DATA");
 
         for (int i = 1; i < 6; i++) {
             Club c = new Club();
@@ -55,7 +63,7 @@ public class MockService {
 
         List<Team> teams = MockService.teams;
         Collections.shuffle(teams);
-        if (teams.size()%2==1) {
+        if (teams.size() % 2 == 1) {
             Team t = new Team();
             t.setName("No team");
             teams.add(t);
@@ -80,6 +88,41 @@ public class MockService {
             }
         }
 
+    }
+
+    private void initDb() {
+
+        mockLeague();
+
+        PlayerEntity pe = new PlayerEntity();
+        pe.setFirstName("Tomas");
+        pe.setSurname("nesvadba");
+
+        pe = playerJpaRepository.save(pe);
+
+        LicenceEntity le = new LicenceEntity();
+        le.setNumber("a4684684");
+        le.setPlayer(pe);
+
+        licenceJpaRepository.save(le);
+
+    }
+
+    private void mockLeague() {
+        League extraliga = new League();
+        extraliga.setName("Extraliga");
+
+        League liga1 = new League();
+        liga1.setName("1. Liga");
+
+        League liga2 = new League();
+        liga2.setName("2. Liga");
+
+        leagueRepository.save(extraliga);
+        leagueRepository.save(liga1);
+        leagueRepository.save(liga2);
+
+        leagues.addAll(leagueRepository.findAll());
     }
 
 }

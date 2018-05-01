@@ -9,7 +9,6 @@ public @Data class Tournament {
 
     private List<Match> matches = new ArrayList<>();
     private List<Referee> refferess = new ArrayList<>();
-    private String legue;
     private int round;
     private Place place;
 }

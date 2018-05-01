@@ -72,6 +72,12 @@
 			<artifactId>postgresql</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>ma.glasnost.orika</groupId>
+			<artifactId>orika-core</artifactId>
+			<version>1.4.2</version><!-- or latest version -->
+		</dependency>
+
 		<!-- <groupId>org.springframework</groupId> -->
 		<!-- <artifactId>spring-beans</artifactId> -->
 		<!-- <version>3.0.5.RELEASE</version> -->
