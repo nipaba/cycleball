@@ -5,8 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import com.sczlin.cycleball.entity.PlayerEntity;
 
-
 @Repository
 public interface PlayerJpaRepository extends JpaRepository<PlayerEntity, Long> {
+
+    PlayerEntity findOneByFirstnameAndSurname(String firstName, String surname);
 
 }

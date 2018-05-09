@@ -16,12 +16,6 @@ import com.sczlin.cycleball.service.MockService;
 public class HelloController {
 
     private static final Logger LOGGER = Logger.getLogger(HelloController.class);
-    
-    @Autowired
-    private PlayerJpaRepository playerJpaRepository;
-    
-    @Autowired
-    private LicenceJpaRepository licenceJpaRepository;
 
     @GetMapping("/")
     public String index(Model model) {
@@ -29,10 +23,8 @@ public class HelloController {
         model.addAttribute("leagues", MockService.leagues);
         model.addAttribute("teams", MockService.teams);
         model.addAttribute("matches", MockService.matches);
-        
+
         return "index";
     }
-    
-
 
 }

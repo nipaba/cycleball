@@ -1,23 +1,14 @@
 package com.sczlin.cycleball.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.*;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sczlin.cycleball.domain.Club;
-import com.sczlin.cycleball.domain.League;
-import com.sczlin.cycleball.domain.Match;
-import com.sczlin.cycleball.domain.Team;
-import com.sczlin.cycleball.entity.LicenceEntity;
-import com.sczlin.cycleball.entity.PlayerEntity;
-import com.sczlin.cycleball.repository.LeagueRepository;
-import com.sczlin.cycleball.repository.jpa.LicenceJpaRepository;
-import com.sczlin.cycleball.repository.jpa.PlayerJpaRepository;
+import com.sczlin.cycleball.domain.*;
+import com.sczlin.cycleball.repository.*;
 
 @Service
 public class MockService {
@@ -25,19 +16,26 @@ public class MockService {
     private static final Logger LOGGER = Logger.getLogger(MockService.class);
 
     @Autowired
-    private PlayerJpaRepository playerJpaRepository;
+    private PlayerRepository playerRepository;
 
     @Autowired
-    private LicenceJpaRepository licenceJpaRepository;
+    private LicenceRepository licenceRepository;
 
     @Autowired
     private LeagueRepository leagueRepository;
+
+    @Autowired
+    private ClubRepository clubRepository;
+
+    @Autowired
+    private TeamRepository teamRepository;
 
     public static List<League> leagues = new ArrayList<>();
     public static List<Club> clubs = new ArrayList<>();
     public static List<Team> teams = new ArrayList<>();
     public static List<Match> matches = new ArrayList<>();
-
+    public static Player player = null;
+    
     public static List<String> clubNames = Arrays.asList("Zlin", "Prerov", "Praha", "Olomouc", "Plzen", "Svitavka");
 
     public void init() {
@@ -93,18 +91,76 @@ public class MockService {
     private void initDb() {
 
         mockLeague();
+        mockClubs();
+        mockPlayers();
+        mockLicences();
 
-        PlayerEntity pe = new PlayerEntity();
-        pe.setFirstName("Tomas");
-        pe.setSurname("nesvadba");
+    }
 
-        pe = playerJpaRepository.save(pe);
+    private void mockLicences() {
+        Random rand = new Random(System.currentTimeMillis());
+        for (int n = 0; n < 10; n++) {
+            Licence l = new Licence();
+            l.setNumber(rand.nextInt(99999) + "");
+            l.setYear(2000 + n);
+            l.setPlayer(player);
+            licenceRepository.save(l);
+        }
+    }
 
-        LicenceEntity le = new LicenceEntity();
-        le.setNumber("a4684684");
-        le.setPlayer(pe);
+    private void mockPlayers() {
+        Player p1 = new Player();
+        p1.setFirstname("Tomas");
+        p1.setSurname("nesvadba");
+        p1.setBirthdate(LocalDateTime.now());
 
-        licenceJpaRepository.save(le);
+        Player p2 = new Player();
+        p2.setFirstname("Honza");
+        p2.setSurname("Krejčí");
+        p2.setBirthdate(LocalDateTime.now());
+
+        Player p3 = new Player();
+        p3.setFirstname("Martin");
+        p3.setSurname("Struhař");
+        p3.setBirthdate(LocalDateTime.now());
+        
+        player = p1;
+
+        playerRepository.save(p1);
+        playerRepository.save(p2);
+        playerRepository.save(p3);
+
+        Team t1 = new Team();
+        t1.setPlayer1(p1);
+        t1.setPlayer2(p2);
+        t1.setReservePlayer(p3);
+
+        teamRepository.save(t1);
+
+    }
+
+    private void mockClubs() {
+
+        Club c1 = new Club();
+        c1.setClubName("Sokol Zlin - prštné");
+
+        Club c2 = new Club();
+        c2.setClubName("Prerov");
+
+        Club c3 = new Club();
+        c3.setClubName("Milo Olomouc");
+
+        Club c4 = new Club();
+        c4.setClubName("Plzen");
+
+        Club c5 = new Club();
+        c5.setClubName("SC svitavka");
+
+        clubRepository.save(c1);
+        clubRepository.save(c2);
+        clubRepository.save(c3);
+        clubRepository.save(c4);
+        clubRepository.save(c5);
 
     }
 

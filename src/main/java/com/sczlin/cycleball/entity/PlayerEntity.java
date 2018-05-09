@@ -18,7 +18,7 @@ public @Data class PlayerEntity {
     private Long id;
 
     @Column(name = "firstname")
-    private String firstName;
+    private String firstname;
 
     @Column(name = "surname")
     private String surname;

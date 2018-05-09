@@ -9,7 +9,6 @@
 <body>
 
  	<@m.menu leagues=leagues /> 
-    <h2>Radball manager v0.1</h2>
   
     <ul>
     	<#list teams as team>

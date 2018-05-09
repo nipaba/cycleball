@@ -21,9 +21,6 @@ public class LeagueRepositoryImpl implements LeagueRepository {
     @Autowired
     private MapperFacade mapper;
 
-    /* (non-Javadoc)
-     * @see com.sczlin.cycleball.repository.LeagueRepository#findAll()
-     */
     @Override
     public List<League> findAll() {
 
@@ -33,9 +30,6 @@ public class LeagueRepositoryImpl implements LeagueRepository {
         return leagues;
     }
 
-    /* (non-Javadoc)
-     * @see com.sczlin.cycleball.repository.LeagueRepository#findOne(java.lang.String)
-     */
     @Override
     public League findOne(String name) {
         LeagueEntity leagueEntity = jpa.findOneByName(name);
@@ -45,9 +39,6 @@ public class LeagueRepositoryImpl implements LeagueRepository {
         return league;
     }
 
-    /* (non-Javadoc)
-     * @see com.sczlin.cycleball.repository.LeagueRepository#save(com.sczlin.cycleball.domain.League)
-     */
     @Override
     public void save(League league) {
         LeagueEntity leagueEntity = mapper.map(league, LeagueEntity.class);

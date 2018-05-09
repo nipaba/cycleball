@@ -36,8 +36,7 @@ public class WebApplication {
     public void doSomethingAfterStartup() throws IOException {
 
         mock.init();
-        // Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler
-        // http://localhost:8081/");
+//        Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler http://localhost:8081/");
         LOGGER.info("XXX " + "Our DataSource is = " + dataSource);
 
     }
